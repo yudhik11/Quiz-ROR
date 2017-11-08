@@ -1,0 +1,87 @@
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<br/><br/>
+<div class="container" style="text-align:center">
+    <% if current_user %>
+    <h1 ><u>Welcome Home!!</u></h1>
+    <% if current_user.admin==true %>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-user"></span>Hi Admin!</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/admin">Go to admin page</a></li>
+                <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+            </ul>
+        </div>
+    </nav>
+    <% else %>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-user"></span>Hi <%= current_user.email %>!</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+            </ul>
+        </div>
+    </nav>
+    <% end %>
+    <br/>
+    <br/>
+    <br/>
+    <ul>
+        <h3><i><u>Sports</u></i></h3>
+        <% if Leaderboard.find_by_user_id(current_user.id).cmax == -1 %>
+        <li><%= link_to "Cricket", '/crickets/',class: "btn btn-danger" %></li>
+        <br/>
+        <% else %>
+        <li><%= link_to "Cricket", '/crickets/',class: "btn btn-success" %></li>
+        <br/>
+        <% end %>
+        <% if Leaderboard.find_by_user_id(current_user.id).fmax == -1 %>
+        <li><%= link_to "Football", '/footballs/',class: "btn btn-danger" %></li>
+        <br/>
+        <% else %>
+        <li><%= link_to "Football", '/footballs/',class: "btn btn-success" %></li>
+        <br/>
+        <% end %>
+    </ul>
+    <ul>
+        <h3><i><u>Movies</u></i></h3>
+        <% if Leaderboard.find_by_user_id(current_user.id).bmax == -1 %>
+        <li><%= link_to "Bollywood", '/bollywoods/',class: "btn btn-danger"  %></li>
+        <br/>
+        <% else %>
+        <li><%= link_to "Bollywood", '/bollywoods/',class: "btn btn-success" %></li>
+        <br/>
+        <% end %>
+        <% if Leaderboard.find_by_user_id(current_user.id).hmax == -1 %>
+        <li><%= link_to "Hollywood", '/hollywoods/',class: "btn btn-danger"  %></li>
+        <br/>
+        <% else %>
+        <li><%= link_to "Hollywood", '/hollywoods/',class: "btn btn-success" %></li>
+        <br/>
+        <% end %>
+    </ul>
+    <%= link_to "Leaderboard", '/leaderboards',class: "btn btn-info" %>
+</div>
+<% else %>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/users/sign_up"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="/users/sign_in"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+    </div>
+</nav>
+<h1 ><u>Welcome To Quiz App!!</u></h1>
+<% end %>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

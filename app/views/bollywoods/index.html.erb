@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<br/><br/>
+
+<nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Quiz App</a><br/>
+          <a class="navbar-brand" href="/bollywoods">Leader Board</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+          <% if current_user.admin==true %>
+          <li><a href="/admin">Go to admin page</a></li>
+        <% end %>
+          <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+      </ul>
+      </div>
+</nav>
+<br/><br/><br/>
+<h3 style="text-align:center"> Your current score is <%= @curscore.Bollywood %></h3>
+<br/><br/><br/>
+<div class = "container">
+    <table class = "table table-striped">
+        <thead>
+            <tr>
+                <th>User name</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @bollywoods.each do |bollywood| %>
+            <tr>
+                <td><%= User.find(bollywood.user_id).email %></td>
+                <td><%= bollywood.bmax %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <%= link_to "Start New",'/bollywoods/1',class: "btn btn-primary" %>
+    <br/>
+    <br/>
+    <br/>
+    <% if @curscore.bcur>0 %>
+    <% if @curscore.bcur!=Bollywood.count() %>
+    <%= link_to "Resume",'/bollywoods/'+(@curscore.bcur).to_s,class: "btn btn-primary" %>
+    <% end %>
+    <% end %>
+    <br/>
+    <br/>
+</div>
+

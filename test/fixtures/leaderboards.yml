@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  Football: 1
+  Cricket: 1
+  Hollywood: 1
+  Bollywood: 1
+
+two:
+  user: two
+  Football: 1
+  Cricket: 1
+  Hollywood: 1
+  Bollywood: 1

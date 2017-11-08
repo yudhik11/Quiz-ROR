@@ -1,0 +1,59 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<br/><br/>
+
+<nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Quiz App</a><br/>
+          <a class="navbar-brand" href="/crickets">Leader Board</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+          <% if current_user.admin==true %>
+          <li><a href="/admin">Go to admin page</a></li>
+        <% end %>
+          <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+      </ul>
+      </div>
+</nav>
+<div class="container">
+    <br/><br><br>
+    <% if @cricket.mcq==true %>
+    <form method="GET" action="#">
+    <ul>
+        <li><strong> Question: </strong> <%= @cricket.question %> (Multi Choice Multi Correct) </li>
+        <br/>
+        <li><%= check_box_tag (:A) %> <%= @cricket.option1 %> </li>
+        <br/>
+        <li><%= check_box_tag (:B) %> <%= @cricket.option2 %> </li>
+        <br/>
+        <li><%= check_box_tag (:C) %> <%= @cricket.option3 %> </li>
+        <br/>
+        <li><%= check_box_tag (:D) %> <%= @cricket.option4 %> </li>
+        <br/>
+    </ul>
+    <% else %>
+    <form method="GET" action="#">
+    <ul>
+        <li><strong> Question: </strong> <%= @cricket.question %> (Multi Choice Single Correct) </li>
+        <br/>
+        <li><input type="radio" name="mcmc" value="A"> <%= @cricket.option1 %> </li>
+        <br/>
+        <li><input type="radio" name="mcmc" value="B"> <%= @cricket.option2 %> </li>
+        <br/>
+        <li><input type="radio" name="mcmc" value="C"> <%= @cricket.option3 %> </li>
+        <br/>
+        <li><input type="radio" name="mcmc" value="D"> <%= @cricket.option4 %> </li>
+        <br/>
+    </ul>
+    <% end %>
+    <% if Cricket.count() == @cricket.id %>
+    <input type="Submit" name="Submit" value="Over" class="btn btn-danger" />
+    <%else%>
+    <input type="Submit" name="Submit" value="Continue" class="btn btn-primary" />
+    <%end%>
+    <br/><br/>
+</div>
+

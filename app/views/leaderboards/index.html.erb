@@ -1,0 +1,45 @@
+<br/><br/>
+<div class ="container">
+    <h3> Your current score in Movie Genre is <%= @curscore.Hollywood+@curscore.Bollywood %></h3>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th colspan="2">Movie</th>
+            </tr>
+            <tr>
+                <th>User name</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @leadermovie.each do |movie| %>
+            <tr>
+                <td><%= User.find(movie.user_id).email %></td>
+                <td><%= movie.hmax+movie.bmax %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <br/><br/>
+    <h3> Your current score in Sports Genre is <%= @curscore.Cricket + @curscore.Football %></h3>
+    <table  class="table table-hover">
+        <thead>
+            <tr>
+                <th colspan="2">Sports</th>
+            </tr>
+            <tr>
+                <th>User name</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @leadersports.each do |sport| %>
+            <tr>
+                <td><%= User.find(sport.user_id).email %></td>
+                <td><%= sport.fmax+sport.cmax %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <%= link_to "Home", '/', class: "btn btn-info" %>
+</div>
